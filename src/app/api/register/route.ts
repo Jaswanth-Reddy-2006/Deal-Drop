@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
+import * as bcrypt from "bcryptjs";
 import { connectToDatabase } from "@/lib/mongoose";
 import User from "@/models/User";
 

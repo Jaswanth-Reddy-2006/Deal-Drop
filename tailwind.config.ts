@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,32 +10,27 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        brand: {
-          primary: "#2563EB",
-          bg: "#F8FAFC",
-          textPrimary: "#0F172A",
-          textSecondary: "#475569",
-          border: "#E2E8F0",
-          success: "#16A34A",
-          danger: "#DC2626",
-        },
+        // ── New DealDrop Brand Colors ─────────────────────────
+        "primary": "#24583C",   // Dark Green  — headers, primary buttons
+        "secondary": "#B6B7F4",   // Lavender    — accents, seller card
+        "accent": "#F5E74E",   // Yellow      — CTAs, highlights
+        "background-light": "#F5F5F5",  // Off-white background
+        "background-dark": "#0f1f16",  // Deep green dark mode
+        "tertiary": "#B6B7F4",   // same as secondary for now
       },
       fontFamily: {
-        poppins: ["var(--font-poppins)"],
-        inter: ["var(--font-inter)"],
-      },
-      spacing: {
-        section: "80px",
-        gridGap: "24px",
+        "display": ["var(--font-playfair)", "Georgia", "serif"],
+        "serif": ["var(--font-playfair)", "Georgia", "serif"],
+        "subheading": ["var(--font-ramaraja)", "serif"],
+        "body": ["var(--font-montserrat)", "system-ui", "sans-serif"],
       },
       borderRadius: {
-        default: "12px",
-      },
-      maxWidth: {
-        container: "1200px",
-      },
-      boxShadow: {
-        premium: "0 20px 50px rgba(0, 0, 0, 0.05)",
+        DEFAULT: "0.25rem",
+        lg: "0.5rem",
+        xl: "0.75rem",
+        "2xl": "1rem",
+        "3xl": "1.5rem",
+        full: "9999px",
       },
     },
   },

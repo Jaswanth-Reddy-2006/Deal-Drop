@@ -2,172 +2,127 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    @apply bg-brand-bg text-brand-textPrimary font-inter antialiased;
-    font-size: 16px;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-poppins font-bold text-brand-textPrimary;
-    line-height: 1.15;
-  }
-
-  h1 {
-    font-size: 36px;
-  }
-
-  h2 {
-    font-size: 28px;
-  }
-
-  h3 {
-    font-size: 22px;
-  }
-
-  p {
-    font-size: 16px;
-    line-height: 1.65;
-  }
+/* ── DealDrop Brand Theme — CSS Variables (Guaranteed Override) ───────── */
+:root {
+  --color-primary: #24583C;
+  --color-secondary: #B6B7F4;
+  --color-accent: #F5E74E;
+  --color-bg: #F5F5F5;
+  --color-tertiary: #B6B7F4;
 }
 
+/* ── Apply background to body ──────────────────────── */
+body {
+  background-color: #F5F5F5 !important;
+}
+
+/* ── Force Tailwind custom color classes to output ─── */
 @layer utilities {
-
-  /* ── Container ─────────────────────────────────── */
-  .container-main {
-    @apply max-w-[1200px] mx-auto px-6 w-full;
+  .bg-primary {
+    background-color: #24583C !important;
   }
 
-  /* ── Buttons ────────────────────────────────────── */
-  .btn-primary {
-    @apply bg-brand-primary text-white font-bold px-8 py-3 rounded-2xl transition-all duration-200 hover:bg-blue-700 hover:-translate-y-[2px] active:scale-[0.97] shadow-lg shadow-brand-primary/25 flex items-center justify-center gap-2 text-[15px];
+  .text-primary {
+    color: #24583C !important;
   }
 
-  .btn-secondary {
-    @apply bg-white text-brand-textPrimary font-bold border-2 border-brand-border px-8 py-3 rounded-2xl transition-all duration-200 hover:border-brand-primary hover:text-brand-primary hover:-translate-y-[2px] active:scale-[0.97] flex items-center justify-center gap-2 text-[15px];
+  .border-primary {
+    border-color: #24583C !important;
   }
 
-  /* ── Cards ──────────────────────────────────────── */
-  .card-base {
-    @apply bg-white border border-brand-border rounded-2xl transition-all duration-300;
+  .bg-secondary {
+    background-color: #B6B7F4 !important;
   }
 
-  .card-hover {
-    @apply hover:shadow-lg hover:-translate-y-1;
+  .text-secondary {
+    color: #B6B7F4 !important;
   }
 
-  .card-premium {
-    @apply bg-white border border-brand-border rounded-3xl p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1;
+  .border-secondary {
+    border-color: #B6B7F4 !important;
   }
 
-  /* ── Section Spacing ────────────────────────────── */
-  .section {
-    @apply py-20;
+  .bg-accent {
+    background-color: #F5E74E !important;
   }
 
-  .section-sm {
-    @apply py-12;
+  .text-accent {
+    color: #F5E74E !important;
   }
 
-  /* ── Form inputs ────────────────────────────────── */
-  .input {
-    @apply w-full px-4 py-3 bg-brand-bg border border-brand-border rounded-xl text-[15px] text-brand-textPrimary placeholder:text-brand-textSecondary/60 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all duration-200;
+  .border-accent {
+    border-color: #F5E74E !important;
   }
 
-  /* ── Badges ─────────────────────────────────────── */
-  .badge {
-    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wide;
+  .bg-background-light {
+    background-color: #F5F5F5 !important;
   }
 
-  .badge-primary {
-    @apply badge bg-brand-primary/10 text-brand-primary;
+  .text-tertiary {
+    color: #B6B7F4 !important;
   }
 
-  .badge-success {
-    @apply badge bg-green-100 text-green-700;
+  /* Opacity variants */
+  .bg-primary\/10 {
+    background-color: rgba(36, 88, 60, 0.10) !important;
   }
 
-  .badge-danger {
-    @apply badge bg-red-100 text-red-600;
+  .bg-primary\/20 {
+    background-color: rgba(36, 88, 60, 0.20) !important;
   }
 
-  .badge-warning {
-    @apply badge bg-amber-100 text-amber-700;
+  .bg-secondary\/10 {
+    background-color: rgba(182, 183, 244, 0.10) !important;
   }
 
-  /* ── Glass morphism ─────────────────────────────── */
-  .glass {
-    @apply bg-white/70 backdrop-blur-xl border-b border-brand-border;
+  .bg-secondary\/20 {
+    background-color: rgba(182, 183, 244, 0.20) !important;
   }
 
-  /* ── Gradient utilities ─────────────────────────── */
-  .gradient-blue {
-    background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+  .bg-accent\/10 {
+    background-color: rgba(245, 231, 78, 0.10) !important;
   }
 
-  .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-primary to-blue-400;
+  .bg-accent\/20 {
+    background-color: rgba(245, 231, 78, 0.20) !important;
   }
 
-  /* ── Scrollbar ──────────────────────────────────── */
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
+  .bg-accent\/30 {
+    background-color: rgba(245, 231, 78, 0.30) !important;
   }
 
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  .text-primary\/80 {
+    color: rgba(36, 88, 60, 0.80) !important;
   }
 
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
+  .text-accent\/30 {
+    color: rgba(245, 231, 78, 0.30) !important;
   }
 
-  .custom-scrollbar::-webkit-scrollbar-track {
-    @apply bg-transparent;
+  .border-primary\/10 {
+    border-color: rgba(36, 88, 60, 0.10) !important;
   }
 
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-brand-border rounded-full;
+  .border-primary\/20 {
+    border-color: rgba(36, 88, 60, 0.20) !important;
   }
 
-  body::-webkit-scrollbar {
-    width: 8px;
+  .border-secondary\/20 {
+    border-color: rgba(182, 183, 244, 0.20) !important;
   }
 
-  body::-webkit-scrollbar-track {
-    @apply bg-brand-bg;
+  .border-accent\/30 {
+    border-color: rgba(245, 231, 78, 0.30) !important;
   }
 
-  body::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 rounded-full border-2 border-brand-bg;
+  .shadow-primary\/20 {
+    --tw-shadow-color: rgba(36, 88, 60, 0.20) !important;
   }
 
-  body::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-400;
-  }
-
-  /* ── Page fade-in ───────────────────────────────── */
-  .page-enter {
-    animation: pageEnter 0.3s ease-out forwards;
-  }
-
-  @keyframes pageEnter {
-    from {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  /* Hero Background Gradient */
+  .hero-gradient {
+    background: radial-gradient(circle at 20% 30%, rgba(182, 183, 244, 0.25) 0%, transparent 55%),
+      radial-gradient(circle at 80% 70%, rgba(36, 88, 60, 0.08) 0%, transparent 55%),
+      #F5F5F5;
   }
 }

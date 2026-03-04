@@ -1,221 +1,224 @@
-"use client";
-
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { ArrowRight, ShoppingBag, ShieldCheck, Zap, LineChart, TagIcon, Store, PlusCircle } from "lucide-react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-
-const fadeUp = (delay = 0) => ({
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.45, ease: [0.25, 0.1, 0.25, 1] as const, delay },
-});
-
-const inView = (delay = 0) => ({
-    initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    transition: { duration: 0.45, ease: [0.25, 0.1, 0.25, 1] as const, delay },
-});
+import Link from 'next/link';
+import HeroAnimated from '@/components/HeroAnimated';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 export default function LandingPage() {
-    const { data: session } = useSession();
-    const router = useRouter();
-
-    const handleShopNow = () => {
-        if (session?.user) {
-            const role = (session.user as any).role;
-            router.push(role === "seller" ? "/seller-dashboard" : "/store");
-        } else {
-            router.push("/login");
-        }
-    };
-
-    const handleBecomeSeller = () => {
-        if (session?.user) {
-            router.push("/seller-dashboard");
-        } else {
-            router.push("/register?role=seller");
-        }
-    };
-
     return (
-        <div className="bg-white min-h-screen page-enter">
+        <>
+            <Navbar />
 
-            {/* ── HERO ──────────────────────────────────────── */}
-            <section className="relative pt-28 pb-20 border-b border-brand-border overflow-hidden">
-                {/* Radial glow */}
-                <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-brand-primary/6 rounded-full blur-[120px] pointer-events-none" />
+            <section className="hero-gradient relative overflow-hidden py-16 md:py-24 px-6">
+                <div className="absolute top-20 right-10 w-64 h-64 bg-secondary/20 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-20 left-10 w-96 h-96 bg-accent/10 rounded-full blur-[100px]"></div>
 
-                <div className="container-main relative z-10 text-center max-w-3xl mx-auto">
-                    <motion.div {...fadeUp(0)}
-                        className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-primary/8 border border-brand-primary/20 rounded-full mb-8">
-                        <span className="w-1.5 h-1.5 rounded-full bg-brand-primary animate-pulse" />
-                        <span className="text-[11px] font-black uppercase tracking-widest text-brand-primary">Multi-Vendor Marketplace</span>
-                    </motion.div>
-
-                    <motion.h1 {...fadeUp(0.08)}
-                        className="text-5xl md:text-6xl font-black font-poppins text-brand-textPrimary leading-tight tracking-tight mb-6">
-                        Buy Smart.<br />
-                        <span className="text-brand-primary">Sell Smarter.</span>
-                    </motion.h1>
-
-                    <motion.p {...fadeUp(0.16)}
-                        className="text-lg text-brand-textSecondary leading-relaxed max-w-xl mx-auto mb-10">
-                        DealDrop connects curated sellers with buyers who demand quality. One platform — everything you need to shop or grow a business.
-                    </motion.p>
-
-                    <motion.div {...fadeUp(0.22)} className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button onClick={handleShopNow}
-                            className="btn-primary px-10 py-4 text-base shadow-xl shadow-brand-primary/20 rounded-2xl gap-2">
-                            <ShoppingBag className="w-5 h-5" /> Start Shopping
-                        </button>
-                        <button onClick={handleBecomeSeller}
-                            className="btn-secondary px-10 py-4 text-base rounded-2xl gap-2">
-                            <PlusCircle className="w-5 h-5" /> Become a Seller
-                        </button>
-                    </motion.div>
-                </div>
-
-                {/* Stats strip */}
-                <motion.div {...fadeUp(0.32)} className="container-main mt-16">
-                    <div className="grid grid-cols-3 divide-x divide-brand-border bg-brand-bg border border-brand-border rounded-2xl overflow-hidden max-w-2xl mx-auto">
-                        {[
-                            { number: "140+", label: "Premium Products" },
-                            { number: "7", label: "Categories" },
-                            { number: "50+", label: "Trusted Brands" },
-                        ].map((s, i) => (
-                            <div key={i} className="py-6 text-center">
-                                <p className="text-2xl font-black font-poppins text-brand-textPrimary">{s.number}</p>
-                                <p className="text-[13px] text-brand-textSecondary font-medium mt-1">{s.label}</p>
-                            </div>
-                        ))}
-                    </div>
-                </motion.div>
-            </section>
-
-            {/* ── HOW IT WORKS ───────────────────────────────── */}
-            <section className="section bg-brand-bg/60 border-b border-brand-border">
-                <div className="container-main">
-                    <div className="text-center mb-12">
-                        <span className="badge-primary mb-4 inline-block">How It Works</span>
-                        <h2 className="text-3xl font-black font-poppins text-brand-textPrimary">Built for Every Role</h2>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {[
-                            {
-                                icon: <Zap className="w-5 h-5 text-brand-primary" />,
-                                title: "Instant Setup",
-                                desc: "Sellers go live in under 5 minutes with our streamlined onboarding — no tech knowledge required.",
-                                color: "bg-blue-50",
-                            },
-                            {
-                                icon: <ShieldCheck className="w-5 h-5 text-green-600" />,
-                                title: "Trusted & Secure",
-                                desc: "Every transaction is protected by multi-layer fraud prevention, dispute resolution, and buyer guarantee.",
-                                color: "bg-green-50",
-                            },
-                            {
-                                icon: <LineChart className="w-5 h-5 text-purple-600" />,
-                                title: "Growth Insights",
-                                desc: "Real-time analytics help sellers optimize inventory, pricing, and discover their top-performing products.",
-                                color: "bg-purple-50",
-                            },
-                        ].map((item, i) => (
-                            <motion.div key={i} {...inView(i * 0.1)}
-                                className="card-base card-hover p-8 group">
-                                <div className={`w-12 h-12 ${item.color} rounded-xl flex items-center justify-center mb-6`}>
-                                    {item.icon}
-                                </div>
-                                <h3 className="text-lg font-bold text-brand-textPrimary font-poppins mb-3">{item.title}</h3>
-                                <p className="text-[15px] text-brand-textSecondary leading-relaxed">{item.desc}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* ── FOR BUYERS & SELLERS ───────────────────────── */}
-            <section className="section">
-                <div className="container-main">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-
-                        {/* For Buyers */}
-                        <motion.div {...inView(0)} className="card-base p-10">
-                            <span className="badge-primary mb-6 inline-block">For Buyers</span>
-                            <h2 className="text-2xl font-black font-poppins text-brand-textPrimary mb-4 leading-snug">
-                                Curated Drops From Verified Sellers
-                            </h2>
-                            <p className="text-brand-textSecondary text-[15px] leading-relaxed mb-8">
-                                No clutter. No compromises. Every product on DealDrop has been vetted for quality, pricing transparency, and seller accountability.
-                            </p>
-                            <ul className="space-y-3 mb-8">
-                                {["Buyer Protection Program", "Real-time Order Tracking", "Verified Seller Badges", "30-Day Easy Returns"].map(point => (
-                                    <li key={point} className="flex items-center gap-3 text-[15px] font-medium text-brand-textPrimary">
-                                        <div className="w-5 h-5 bg-brand-primary/10 rounded-full flex items-center justify-center shrink-0">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-brand-primary" />
-                                        </div>
-                                        {point}
-                                    </li>
-                                ))}
-                            </ul>
-                            <Link href="/store" className="inline-flex items-center gap-2 text-brand-primary font-bold text-[15px] hover:gap-4 transition-all">
-                                Explore the Store <ArrowRight className="w-4 h-4" />
+                <div className="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    {/* Text */}
+                    <div className="flex flex-col gap-8 z-10">
+                        <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1 text-primary text-sm font-bold uppercase tracking-widest w-fit">
+                            <span className="material-symbols-outlined text-sm">auto_awesome</span> Exclusive Drops
+                        </div>
+                        <h1 className="font-display text-6xl md:text-8xl font-black leading-[1.05] text-primary tracking-tight">
+                            Buy <span className="text-primary">Smart.</span><br />
+                            Sell <span className="text-secondary italic">Smarter.</span>
+                        </h1>
+                        <p className="max-w-md text-lg text-slate-600 leading-relaxed font-body">
+                            Experience the premium multi-vendor marketplace curated for high-end brands and discerning buyers worldwide.
+                        </p>
+                        <div className="flex flex-wrap gap-4">
+                            <Link href="/store" className="rounded-full bg-primary px-8 py-4 text-lg font-bold text-white shadow-xl shadow-primary/20 hover:brightness-110 transition-all text-center">
+                                Explore Products
                             </Link>
-                        </motion.div>
+                            <Link href="/register?role=seller" className="rounded-full border-2 border-primary px-8 py-4 text-lg font-bold text-primary hover:bg-primary hover:text-white transition-all text-center">
+                                Sell with DealDrop
+                            </Link>
+                        </div>
+                    </div>
 
-                        {/* For Sellers */}
-                        <motion.div {...inView(0.12)} className="bg-slate-900 rounded-3xl p-10 text-white relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/15 blur-[80px] rounded-full pointer-events-none" />
-                            <div className="relative z-10">
-                                <span className="badge mb-6 inline-block bg-white/10 text-white border border-white/20">For Sellers</span>
-                                <h2 className="text-2xl font-black font-poppins leading-snug mb-4">
-                                    Scale Your Business Without Limits
-                                </h2>
-                                <p className="text-white/80 text-[15px] leading-relaxed mb-8">
-                                    Our platform handles payments, logistics, and discovery. You focus on building products your customers love.
-                                </p>
-                                <div className="grid grid-cols-3 gap-4 mb-8">
-                                    {[
-                                        { number: "0%", label: "Entry Fee" },
-                                        { number: "24H", label: "Payout" },
-                                        { number: "∞", label: "Products" },
-                                    ].map((s, i) => (
-                                        <div key={i} className="bg-white/10 border border-white/20 rounded-xl p-4 text-center">
-                                            <p className="text-2xl font-black font-poppins text-brand-primary">{s.number}</p>
-                                            <p className="text-white/70 text-[11px] font-bold uppercase tracking-widest mt-1">{s.label}</p>
-                                        </div>
-                                    ))}
+                    {/* Animated Hero */}
+                    <div className="relative pt-6 pb-10">
+                        <HeroAnimated />
+                        <div className="absolute -bottom-2 -left-6 rounded-2xl bg-white p-6 shadow-xl border border-slate-100 z-20">
+                            <div className="flex items-center gap-4">
+                                <div className="rounded-full bg-accent/30 p-3 text-primary">
+                                    <span className="material-symbols-outlined">trending_up</span>
                                 </div>
-                                <button onClick={handleBecomeSeller}
-                                    className="btn-primary w-full py-4 rounded-2xl bg-brand-primary hover:bg-blue-600 justify-center text-base">
-                                    <Store className="w-5 h-5" /> Launch Your Store
-                                </button>
+                                <div>
+                                    <p className="text-sm font-bold text-slate-400">Monthly Growth</p>
+                                    <p className="text-2xl font-black text-primary">+124%</p>
+                                </div>
                             </div>
-                        </motion.div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* ── CATEGORY STRIP ─────────────────────────────── */}
-            <section className="section-sm border-t border-brand-border bg-brand-bg/60">
-                <div className="container-main">
-                    <div className="flex flex-wrap items-center justify-center gap-3">
-                        <span className="text-[13px] font-bold text-brand-textSecondary uppercase tracking-widest mr-4">Shop by:</span>
-                        {["Electronics", "Audio", "Accessories", "Fitness", "Home Tech", "Creation", "Fashion"].map((cat) => (
-                            <Link key={cat} href={`/products?category=${cat}`}
-                                className="px-5 py-2.5 bg-white border border-brand-border rounded-full text-[13px] font-bold text-brand-textPrimary hover:border-brand-primary hover:text-brand-primary hover:bg-brand-primary/5 transition-all">
-                                {cat}
-                            </Link>
-                        ))}
-                        <Link href="/products"
-                            className="px-5 py-2.5 bg-brand-primary text-white rounded-full text-[13px] font-bold hover:bg-blue-700 transition-all">
-                            <TagIcon className="w-3 h-3 inline mr-1.5" />All Products
+            {/* ── FEATURED CATEGORIES ───────────────────────────── */}
+            <section className="px-6 py-16 bg-white">
+                <div className="mx-auto max-w-7xl">
+                    <h2 className="text-center font-display text-3xl font-black text-primary mb-12">Featured Categories</h2>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <Link className="group flex flex-col items-center p-8 bg-background-light rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all" href="#">
+                            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
+                                <span className="material-symbols-outlined text-3xl">devices</span>
+                            </div>
+                            <span className="font-bold text-slate-900">Electronics</span>
+                        </Link>
+                        <Link className="group flex flex-col items-center p-8 bg-background-light rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all" href="#">
+                            <div className="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center text-secondary mb-4 group-hover:scale-110 transition-transform">
+                                <span className="material-symbols-outlined text-3xl">apparel</span>
+                            </div>
+                            <span className="font-bold text-slate-900">Fashion</span>
+                        </Link>
+                        <Link className="group flex flex-col items-center p-8 bg-background-light rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all" href="#">
+                            <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
+                                <span className="material-symbols-outlined text-3xl">home</span>
+                            </div>
+                            <span className="font-bold text-slate-900">Home</span>
+                        </Link>
+                        <Link className="group flex flex-col items-center p-8 bg-background-light rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all" href="#">
+                            <div className="w-16 h-16 rounded-full bg-slate-900/10 flex items-center justify-center text-slate-900 mb-4 group-hover:scale-110 transition-transform">
+                                <span className="material-symbols-outlined text-3xl">diamond</span>
+                            </div>
+                            <span className="font-bold text-slate-900">Jewelry</span>
                         </Link>
                     </div>
                 </div>
             </section>
-        </div>
+
+            {/* ── STATS ────────────────────────────────────────── */}
+            <section className="px-6 py-12 bg-background-light">
+                <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="group relative overflow-hidden rounded-2xl border border-primary/10 bg-white p-8 shadow-sm transition-all hover:shadow-xl">
+                        <div className="absolute -right-4 -top-4 text-primary/5 group-hover:text-primary/10 transition-colors">
+                            <span className="material-symbols-outlined text-9xl">inventory_2</span>
+                        </div>
+                        <p className="text-slate-500 font-semibold mb-1">Premium Products</p>
+                        <h3 className="text-4xl font-black text-primary font-display tracking-tight">140+</h3>
+                    </div>
+                    <div className="group relative overflow-hidden rounded-2xl border border-secondary/20 bg-white p-8 shadow-sm transition-all hover:shadow-xl">
+                        <div className="absolute -right-4 -top-4 text-secondary/10 group-hover:text-secondary/20 transition-colors">
+                            <span className="material-symbols-outlined text-9xl">category</span>
+                        </div>
+                        <p className="text-slate-500 font-semibold mb-1">Market Categories</p>
+                        <h3 className="text-4xl font-black text-primary font-display tracking-tight">7</h3>
+                    </div>
+                    <div className="group relative overflow-hidden rounded-2xl border border-accent/30 bg-white p-8 shadow-sm transition-all hover:shadow-xl">
+                        <div className="absolute -right-4 -top-4 text-accent/20 group-hover:text-accent/40 transition-colors">
+                            <span className="material-symbols-outlined text-9xl">verified</span>
+                        </div>
+                        <p className="text-slate-500 font-semibold mb-1">Trusted Brands</p>
+                        <h3 className="text-4xl font-black text-primary font-display tracking-tight">50+</h3>
+                    </div>
+                </div>
+            </section>
+
+            {/* ── HOW IT WORKS ──────────────────────────────────── */}
+            <section className="px-6 py-20 bg-white">
+                <div className="mx-auto max-w-7xl">
+                    <div className="mb-16 text-center">
+                        <h2 className="font-display text-5xl font-black text-primary mb-4 tracking-tight">How It Works</h2>
+                        <div className="mx-auto h-1 w-24 bg-accent rounded-full"></div>
+                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+
+                        {/* For Buyers */}
+                        <div className="flex flex-col gap-8 rounded-3xl bg-background-light border border-primary/10 p-8 md:p-12 shadow-sm">
+                            <div className="flex items-center justify-between">
+                                <h3 className="text-3xl font-black text-primary font-display">For Buyers</h3>
+                                <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                                    <span className="material-symbols-outlined">person</span>
+                                </div>
+                            </div>
+                            <p className="text-slate-600">Discover hand-picked selections and shop with absolute peace of mind.</p>
+                            <div className="space-y-6">
+                                {[
+                                    { icon: "colors_spark", title: "Curated Drops", desc: "Every product is vetted for quality and authenticity by our global team." },
+                                    { icon: "shield", title: "Buyer Protection", desc: "Secure transactions and escrow services protect every single penny you spend." },
+                                    { icon: "keyboard_return", title: "30-Day Returns", desc: "Not satisfied? We offer no-questions-asked returns for 30 full days." },
+                                ].map((item) => (
+                                    <div key={item.title} className="flex gap-6 items-start">
+                                        <div className="flex-shrink-0 w-12 h-12 rounded-full border-2 border-primary/20 flex items-center justify-center text-primary">
+                                            <span className="material-symbols-outlined">{item.icon}</span>
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold text-slate-900 text-lg">{item.title}</h4>
+                                            <p className="text-sm text-slate-500">{item.desc}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            <Link href="/store" className="mt-4 w-full rounded-xl bg-primary/10 py-4 text-center text-primary font-bold hover:bg-primary hover:text-white transition-all block">
+                                Start Shopping
+                            </Link>
+                        </div>
+
+                        {/* For Sellers */}
+                        <div className="flex flex-col gap-8 rounded-3xl bg-primary p-8 md:p-12 shadow-2xl text-white">
+                            <div className="flex items-center justify-between">
+                                <h3 className="text-3xl font-black font-display">For Sellers</h3>
+                                <div className="h-12 w-12 rounded-xl bg-accent/20 flex items-center justify-center text-accent">
+                                    <span className="material-symbols-outlined">storefront</span>
+                                </div>
+                            </div>
+                            <p className="text-white/70">Scale your brand with the world&apos;s most creator-friendly marketplace.</p>
+                            <div className="space-y-6">
+                                {[
+                                    { icon: "percent", title: "0% Entry Fee", desc: "Launch your shop for free. We only succeed when you make your first sale." },
+                                    { icon: "bolt", title: "24H Payout", desc: "Get your funds faster with our express settlement system within 24 hours." },
+                                    { icon: "all_inclusive", title: "Unlimited Products", desc: "No caps on inventory. List as many products as your business can handle." },
+                                ].map((item) => (
+                                    <div key={item.title} className="flex gap-6 items-start">
+                                        <div className="flex-shrink-0 w-12 h-12 rounded-full border-2 border-accent/30 flex items-center justify-center text-accent">
+                                            <span className="material-symbols-outlined">{item.icon}</span>
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold text-white text-lg">{item.title}</h4>
+                                            <p className="text-sm text-white/60">{item.desc}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            <Link href="/register?role=seller" className="mt-4 w-full rounded-xl text-center bg-accent py-4 text-primary font-bold hover:brightness-110 transition-all block">
+                                Apply to Sell
+                            </Link>
+                        </div>
+                    </div>
+
+                    {/* Trust badges */}
+                    <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="p-8 bg-background-light rounded-2xl border border-primary/10 flex gap-4 items-center">
+                            <span className="material-symbols-outlined text-primary text-4xl">verified_user</span>
+                            <div>
+                                <h4 className="font-bold text-slate-900">Verified Luxury</h4>
+                                <p className="text-sm text-slate-500">Authentication by experts</p>
+                            </div>
+                        </div>
+                        <div className="p-8 bg-background-light rounded-2xl border border-secondary/20 flex gap-4 items-center">
+                            <span className="material-symbols-outlined text-secondary text-4xl">public</span>
+                            <div>
+                                <h4 className="font-bold text-slate-900">Global Shipping</h4>
+                                <p className="text-sm text-slate-500">Reliable worldwide delivery</p>
+                            </div>
+                        </div>
+                        <div className="p-8 bg-background-light rounded-2xl border border-accent/30 flex gap-4 items-center">
+                            <span className="material-symbols-outlined text-primary text-4xl">support_agent</span>
+                            <div>
+                                <h4 className="font-bold text-slate-900">24/7 Concierge</h4>
+                                <p className="text-sm text-slate-500">Dedicated support team</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Compliance strip */}
+                    <div className="mt-16 flex flex-wrap justify-center items-center gap-12 grayscale opacity-40">
+                        <div className="flex items-center gap-2"><span className="material-symbols-outlined">lock</span><span className="font-bold uppercase tracking-tighter">SSL Secure</span></div>
+                        <div className="flex items-center gap-2"><span className="material-symbols-outlined">payments</span><span className="font-bold uppercase tracking-tighter">Instant Payouts</span></div>
+                        <div className="flex items-center gap-2"><span className="material-symbols-outlined">shield_check</span><span className="font-bold uppercase tracking-tighter">PCI Compliant</span></div>
+                    </div>
+                </div>
+            </section>
+            <Footer />
+        </>
     );
 }
