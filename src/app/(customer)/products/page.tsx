@@ -25,7 +25,7 @@ const SORT_OPTIONS = [
     { value: "price_desc", label: "Price: High → Low" },
 ];
 
-const CATEGORIES = ["Electronics", "Audio", "Accessories", "Fitness", "Home Tech", "Creation", "Fashion"];
+const CATEGORIES = ["Haute Couture", "Streetwear", "Footwear", "Electronics", "Audio", "Home Tech", "Fashion"];
 
 export default function ProductsPage() {
     const searchParams = useSearchParams();
@@ -141,11 +141,17 @@ export default function ProductsPage() {
             <div>
                 <h3 className="text-[11px] font-black uppercase tracking-[0.15em] text-brand-textSecondary mb-4">Price Range</h3>
                 <div className="flex items-center gap-2">
-                    <input type="number" placeholder="$0" value={filters.min} onChange={e => setFilter("min", e.target.value)}
-                        className="w-full px-3 py-2 text-sm bg-brand-bg border border-brand-border rounded-xl focus:border-brand-primary outline-none" />
+                    <div className="relative w-full">
+                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-brand-textSecondary text-xs">₹</span>
+                        <input type="number" placeholder="0" value={filters.min} onChange={e => setFilter("min", e.target.value)}
+                            className="w-full pl-7 pr-3 py-2 text-sm bg-brand-bg border border-brand-border rounded-xl focus:border-brand-primary outline-none" />
+                    </div>
                     <span className="text-brand-textSecondary text-sm">–</span>
-                    <input type="number" placeholder="$999" value={filters.max} onChange={e => setFilter("max", e.target.value)}
-                        className="w-full px-3 py-2 text-sm bg-brand-bg border border-brand-border rounded-xl focus:border-brand-primary outline-none" />
+                    <div className="relative w-full">
+                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-brand-textSecondary text-xs">₹</span>
+                        <input type="number" placeholder="99K" value={filters.max} onChange={e => setFilter("max", e.target.value)}
+                            className="w-full pl-7 pr-3 py-2 text-sm bg-brand-bg border border-brand-border rounded-xl focus:border-brand-primary outline-none" />
+                    </div>
                 </div>
             </div>
 
@@ -393,12 +399,12 @@ export default function ProductsPage() {
 
                                                     <div className="flex items-baseline gap-2 mt-auto mb-3">
                                                         <span className="text-lg font-black font-poppins text-brand-textPrimary">
-                                                            ${product.discountPercentage > 0
-                                                                ? (product.price * (1 - product.discountPercentage / 100)).toFixed(2)
-                                                                : product.price.toFixed(2)}
+                                                            ₹{product.discountPercentage > 0
+                                                                ? (product.price * (1 - product.discountPercentage / 100)).toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                                : product.price.toLocaleString('en-IN')}
                                                         </span>
                                                         {product.discountPercentage > 0 && (
-                                                            <span className="text-xs text-brand-textSecondary line-through">${product.price.toFixed(2)}</span>
+                                                            <span className="text-xs text-brand-textSecondary line-through">₹{product.price.toLocaleString('en-IN')}</span>
                                                         )}
                                                     </div>
 

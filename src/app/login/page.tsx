@@ -56,8 +56,8 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[#F5F5F5] p-4">
-            <div className="w-full max-w-[900px] flex rounded-[24px] shadow-2xl overflow-hidden min-h-[600px]">
+        <div className="min-h-screen flex items-center justify-center bg-[#F5F5F5] p-4 md:p-10">
+            <div className="w-full max-w-[1000px] flex flex-col lg:flex-row bg-white rounded-[32px] md:rounded-[40px] shadow-2xl overflow-hidden min-h-[600px]">
 
                 {/* ── LEFT PANEL ─────────────────────────────── */}
                 <div

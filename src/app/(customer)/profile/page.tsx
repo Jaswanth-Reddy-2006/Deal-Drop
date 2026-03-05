@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Package, MapPin, CreditCard, LogOut, ChevronRight, Settings, Heart, Bell, ShieldCheck } from "lucide-react";
+import { Package, MapPin, CreditCard, LogOut, ChevronRight, Settings, Heart, Bell, ShieldCheck, ShoppingBag, BadgeCheck } from "lucide-react";
 import Link from "next/link";
 import { useCartStore } from "@/store/useCartStore";
 import { useState, useEffect } from "react";
@@ -18,31 +18,32 @@ export default function ProfilePage() {
         name: "Jaswanth Reddy",
         email: "jaswanth@example.com",
         joined: "March 2026",
-        rank: "Platinum Member"
+        rank: "Obsidian Member",
+        avatar_color: "bg-[#1A1A1A]"
     };
 
     const stats = [
-        { label: "Total Orders", value: "12", icon: <Package className="w-4 h-4" /> },
-        { label: "Wishlist", value: "8", icon: <Heart className="w-4 h-4" /> },
-        { label: "In Cart", value: cartItems.length, icon: <Package className="w-4 h-4" /> },
-        { label: "Saved Addresses", value: "2", icon: <MapPin className="w-4 h-4" /> },
+        { label: "Drops Secured", value: "12", icon: <Package className="w-4 h-4" />, color: "text-blue-500" },
+        { label: "Wishlist", value: "08", icon: <Heart className="w-4 h-4" />, color: "text-red-500" },
+        { label: "Vault Items", value: cartItems.length, icon: <ShoppingBag className="w-4 h-4" />, color: "text-accent" },
+        { label: "Saved Vaults", value: "02", icon: <MapPin className="w-4 h-4" />, color: "text-purple-500" },
     ];
 
     const menuSections = [
         {
-            title: "Shopping Experience",
+            title: "Collections & Drops",
             items: [
-                { icon: <Package />, label: "Order History", desc: "Track, return, or buy again", link: "/orders" },
-                { icon: <Heart />, label: "My Wishlist", desc: "Items you've saved for later", link: "/wishlist" },
-                { icon: <Bell />, label: "Stock Alerts", desc: "Notifications for back-in-stock drops", link: "#" },
+                { icon: <Package />, label: "Drop History", desc: "Track, return, or secure again", link: "/orders" },
+                { icon: <Heart />, label: "The Wishlist", desc: "Curated items for future drops", link: "/wishlist" },
+                { icon: <Bell />, label: "Drop Alerts", desc: "Get notified before the next drop", link: "#" },
             ]
         },
         {
-            title: "Account Logistics",
+            title: "Vault Security",
             items: [
-                { icon: <MapPin />, label: "Shipping Addresses", desc: "Primary and secondary delivery points", link: "#" },
-                { icon: <CreditCard />, label: "Payment Methods", desc: "Securely stored vault cards", link: "#" },
-                { icon: <Settings />, label: "Personal Details", desc: "Security, email, and password", link: "#" },
+                { icon: <MapPin />, label: "Secure Addresses", desc: "Manage your delivery coordinates", link: "#" },
+                { icon: <CreditCard />, label: "Payment Vault", desc: "Securely encrypted payment methods", link: "#" },
+                { icon: <Settings />, label: "Identity Settings", desc: "Account security and profile preferences", link: "#" },
             ]
         }
     ];
@@ -50,100 +51,115 @@ export default function ProfilePage() {
     if (!mounted) return null;
 
     return (
-        <div className="bg-[#F8FAFC] min-h-screen pb-32">
-            {/* Ambient Background Glow */}
-            <div className="absolute top-0 left-0 w-full h-[300px] bg-brand-primary/5 blur-[100px] -z-10" />
+        <div className="bg-[#FDFDFD] min-h-screen pb-32 relative overflow-hidden">
+            {/* Ambient Background Elements */}
+            <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-primary/[0.02] blur-[120px] rounded-full -z-10" />
+            <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-accent/[0.03] blur-[100px] rounded-full -z-10" />
 
-            <div className="container-main py-12">
-                <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12">
+            <div className="container-main py-12 md:py-20 lg:py-24">
+                <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-20">
 
-                    {/* Sidebar / Profile Card */}
-                    <aside className="w-full lg:w-[380px] space-y-8">
+                    {/* Left: Identity Sidebar */}
+                    <aside className="w-full lg:w-[420px] space-y-10">
                         <motion.div
-                            initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
-                            className="card-premium bg-white p-10 rounded-[40px] sticky top-28"
+                            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                            className="bg-white border border-primary/5 p-12 rounded-[60px] shadow-2xl shadow-primary/5 sticky top-32"
                         >
                             <div className="flex flex-col items-center text-center">
                                 <div className="relative group">
-                                    <div className="w-32 h-32 rounded-[40px] bg-brand-primary/10 flex items-center justify-center text-brand-primary text-5xl font-extrabold border-4 border-white shadow-2xl transition-all group-hover:rotate-3">
-                                        {user.name.charAt(0)}
+                                    <div className={`w-40 h-40 rounded-[50px] ${user.avatar_color} p-1 flex items-center justify-center border-[8px] border-white shadow-2xl transition-transform duration-700 group-hover:rotate-6`}>
+                                        <span className="text-white text-6xl font-display font-black">{user.name.charAt(0)}</span>
                                     </div>
-                                    <div className="absolute bottom-1 right-1 w-8 h-8 bg-green-500 border-4 border-white rounded-full shadow-lg" />
-                                </div>
-                                <h1 className="text-3xl font-extrabold text-brand-textPrimary font-poppins mt-8 mb-2">{user.name}</h1>
-                                <p className="text-brand-textSecondary font-medium">{user.email}</p>
-
-                                <div className="mt-6 px-4 py-2 bg-brand-primary/5 rounded-2xl flex items-center gap-2 border border-brand-primary/10">
-                                    <ShieldCheck className="w-4 h-4 text-brand-primary" />
-                                    <span className="text-xs font-bold text-brand-primary uppercase tracking-widest">{user.rank}</span>
+                                    <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-accent rounded-2xl border-[6px] border-white shadow-xl flex items-center justify-center">
+                                        <BadgeCheck className="w-5 h-5 text-primary" />
+                                    </div>
                                 </div>
 
-                                <div className="w-full border-t border-brand-border border-dashed my-8" />
+                                <div className="mt-10 space-y-2">
+                                    <h1 className="text-4xl font-display font-black text-primary tracking-tight">{user.name}</h1>
+                                    <p className="text-primary/40 font-black text-[10px] uppercase tracking-[0.3em]">{user.rank}</p>
+                                </div>
+
+                                <div className="w-full h-px bg-primary/5 my-10" />
 
                                 <div className="grid grid-cols-2 gap-4 w-full">
                                     {stats.map((stat, i) => (
-                                        <div key={i} className="bg-brand-bg p-4 rounded-3xl text-left border border-brand-border">
-                                            <p className="text-[10px] font-bold text-brand-textSecondary uppercase tracking-widest mb-1">{stat.label}</p>
-                                            <p className="text-xl font-bold text-brand-textPrimary font-poppins">{stat.value}</p>
+                                        <div key={i} className="bg-primary/[0.02] p-5 rounded-[32px] text-left border border-primary/5 hover:bg-white hover:shadow-xl transition-all group">
+                                            <div className={`w-8 h-8 rounded-xl bg-white flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform ${stat.color}`}>
+                                                {stat.icon}
+                                            </div>
+                                            <p className="text-[9px] font-black text-primary/30 uppercase tracking-widest mb-1">{stat.label}</p>
+                                            <p className="text-2xl font-display font-black text-primary">{stat.value}</p>
                                         </div>
                                     ))}
                                 </div>
 
-                                <button className="w-full mt-10 py-4 rounded-2xl border-2 border-brand-border font-bold text-brand-textPrimary hover:bg-brand-primary hover:border-brand-primary hover:text-white transition-all">
-                                    Edit Account Data
-                                </button>
-
-                                <button className="mt-4 text-brand-danger font-bold text-sm hover:underline flex items-center gap-2">
-                                    <LogOut className="w-4 h-4" /> Sign Out
-                                </button>
+                                <div className="w-full mt-10 space-y-4">
+                                    <button className="w-full py-5 bg-primary text-accent rounded-full font-black text-xs uppercase tracking-widest shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
+                                        Secure Identity
+                                    </button>
+                                    <button className="w-full py-5 border-2 border-primary/5 text-primary/40 rounded-full font-black text-xs uppercase tracking-widest hover:bg-primary/5 transition-all flex items-center justify-center gap-2">
+                                        <LogOut size={16} /> Signal Out
+                                    </button>
+                                </div>
                             </div>
                         </motion.div>
                     </aside>
 
-                    {/* Main Settings Area */}
-                    <main className="flex-1 space-y-12">
+                    {/* Right: Management Core */}
+                    <main className="flex-1 space-y-20">
                         {menuSections.map((section, idx) => (
                             <motion.section
                                 key={idx}
-                                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * idx }}
+                                initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 * idx }}
                             >
-                                <h2 className="text-sm font-bold text-brand-textSecondary uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
-                                    {section.title}
-                                    <div className="h-px bg-brand-border flex-1" />
-                                </h2>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="flex items-center gap-6 mb-10">
+                                    <h2 className="text-xs font-black text-primary/20 uppercase tracking-[0.4em] whitespace-nowrap">
+                                        {section.title}
+                                    </h2>
+                                    <div className="h-px bg-primary/5 flex-1" />
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     {section.items.map((item, i) => (
                                         <Link
                                             key={i} href={item.link}
-                                            className="group flex flex-col p-8 bg-white border border-brand-border rounded-[32px] hover:border-brand-primary hover:shadow-2xl hover:shadow-brand-primary/5 transition-all relative overflow-hidden"
+                                            className="group relative p-10 bg-white border border-primary/5 rounded-[50px] hover:shadow-3xl hover:shadow-primary/5 transition-all overflow-hidden block"
                                         >
-                                            <div className="absolute top-0 right-0 w-24 h-24 bg-brand-primary/[0.03] rounded-bl-full group-hover:bg-brand-primary/[0.08] transition-all" />
-                                            <div className="w-12 h-12 bg-brand-bg rounded-xl flex items-center justify-center text-brand-textSecondary group-hover:bg-brand-primary group-hover:text-white transition-all mb-6 shadow-sm">
+                                            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/[0.01] rounded-bl-[100px] group-hover:bg-accent/10 transition-all duration-500" />
+
+                                            <div className="w-14 h-14 bg-primary text-accent rounded-2xl flex items-center justify-center group-hover:scale-110 transition-all mb-8 shadow-xl shadow-primary/10">
                                                 {item.icon}
                                             </div>
-                                            <div className="flex items-center justify-between">
-                                                <h3 className="text-xl font-bold text-brand-textPrimary group-hover:text-brand-primary transition-colors">{item.label}</h3>
-                                                <ChevronRight className="w-5 h-5 text-brand-border group-hover:text-brand-primary group-hover:translate-x-1 transition-all" />
+
+                                            <div className="flex items-center justify-between mb-2">
+                                                <h3 className="text-2xl font-display font-black text-primary">{item.label}</h3>
+                                                <ChevronRight className="w-6 h-6 text-primary/10 group-hover:text-primary group-hover:translate-x-2 transition-all" />
                                             </div>
-                                            <p className="text-sm text-brand-textSecondary mt-2 leading-relaxed">{item.desc}</p>
+                                            <p className="text-sm font-medium text-primary/40 leading-relaxed italic">"{item.desc}"</p>
                                         </Link>
                                     ))}
                                 </div>
                             </motion.section>
                         ))}
 
-                        {/* Security Tip Overlay (Premium Aesthetic) */}
-                        <div className="bg-brand-textPrimary rounded-[40px] p-10 text-white relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/20 blur-[80px] rounded-full" />
-                            <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
-                                <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center border border-white/20">
-                                    <ShieldCheck className="w-8 h-8 text-brand-primary" />
+                        {/* Security Banner */}
+                        <div className="bg-primary rounded-[60px] p-12 md:p-16 text-white relative overflow-hidden shadow-2xl shadow-primary/20">
+                            <div className="absolute top-0 right-0 w-96 h-96 bg-accent/20 blur-[120px] rounded-full" />
+                            <div className="relative z-10 flex flex-col md:flex-row items-center gap-12">
+                                <div className="w-20 h-20 bg-accent rounded-[32px] flex items-center justify-center text-primary shadow-2xl shadow-accent/20 rotate-3">
+                                    <ShieldCheck size={40} />
                                 </div>
-                                <div>
-                                    <h4 className="text-xl font-bold font-poppins mb-2">Two-Factor Authentication Active</h4>
-                                    <p className="text-gray-400 text-sm max-w-md">Your account is currently protected by enterprise-grade 2FA. We recommend rotating your security keys every 90 days for maximum safety.</p>
+                                <div className="flex-1 text-center md:text-left">
+                                    <h4 className="text-3xl font-display font-black mb-4 tracking-tight">Active Vault Guard</h4>
+                                    <p className="text-white/40 text-lg font-medium max-w-xl leading-relaxed">
+                                        Your access is fortified with multi-factor authentication.
+                                        Drop notifications and secure communications are being encrypted in real-time.
+                                    </p>
                                 </div>
-                                <button className="btn-primary py-3 px-8 rounded-xl whitespace-nowrap ml-auto">Manage Security</button>
+                                <button className="bg-accent text-primary px-10 py-5 rounded-full font-black text-sm uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl shadow-accent/10">
+                                    Vault Settings
+                                </button>
                             </div>
                         </div>
                     </main>

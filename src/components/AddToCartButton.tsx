@@ -14,9 +14,10 @@ interface AddToCartButtonProps {
     };
     className?: string;
     showIcon?: boolean;
+    children?: React.ReactNode;
 }
 
-export default function AddToCartButton({ product, className, showIcon = false }: AddToCartButtonProps) {
+export default function AddToCartButton({ product, className, showIcon = false, children }: AddToCartButtonProps) {
     const addToCart = useCartStore((state) => state.addToCart);
     const [added, setAdded] = useState(false);
 
@@ -51,8 +52,8 @@ export default function AddToCartButton({ product, className, showIcon = false }
                 }}
                 className="absolute flex items-center gap-2 w-full justify-center"
             >
-                {showIcon && <ShoppingCart className="w-5 h-5" />}
-                Add to Cart
+                {showIcon && !children && <ShoppingCart className="w-5 h-5" />}
+                {children || "Add to Cart"}
             </motion.div>
 
             <motion.div
@@ -64,14 +65,14 @@ export default function AddToCartButton({ product, className, showIcon = false }
                 }}
                 className="absolute flex items-center gap-2 w-full justify-center"
             >
-                <Check className="w-5 h-5" />
-                Added!
+                <Check className={`w-5 h-5 ${children ? "" : "mr-1"}`} />
+                {!children && "Added!"}
             </motion.div>
 
             {/* Invisible spacer to keep button height */}
             <div className="opacity-0 flex items-center gap-2">
-                {showIcon && <ShoppingCart className="w-5 h-5" />}
-                Add to Cart
+                {showIcon && !children && <ShoppingCart className="w-5 h-5" />}
+                {children || "Add to Cart"}
             </div>
         </button>
     );

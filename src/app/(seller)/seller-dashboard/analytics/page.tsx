@@ -23,42 +23,36 @@ export default function AnalyticsPage() {
 
     return (
         <div className="space-y-10">
-            {/* ── Header ── */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                <div>
-                    <h1 className="text-4xl font-display font-black text-[#1E4D35] tracking-tight">Analytics</h1>
-                    <p className="text-[#1E4D35]/40 font-bold mt-1 text-[15px]">Detailed insights into your store performance.</p>
-                </div>
-                <div className="flex gap-4">
-                    <button className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white text-[#1E4D35] font-black border border-[#1E4D35]/5 shadow-sm">
-                        <Calendar size={18} /> Last 30 Days <ChevronDown size={14} />
-                    </button>
-                    <button className="flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#1E4D35] text-[#F5E74E] font-black shadow-xl shadow-[#1E4D35]/20 hover:scale-[1.05] transition-all">
-                        Download PDF
-                    </button>
-                </div>
+            {/* ── Page Actions ── */}
+            <div className="flex justify-end items-center gap-4">
+                <button className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white text-[#1E4D35] font-black border border-[#1E4D35]/5 shadow-sm">
+                    <Calendar size={18} /> Last 30 Days <ChevronDown size={14} />
+                </button>
+                <button className="flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#1E4D35] text-[#F5E74E] font-black shadow-xl shadow-[#1E4D35]/20 hover:scale-[1.05] transition-all">
+                    Download PDF
+                </button>
             </div>
 
             {/* ── Stats Grid ── */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
                 {mainStats.map((stat, i) => (
                     <motion.div
                         key={stat.label}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.1 }}
-                        className="bg-white rounded-[32px] p-8 shadow-sm border border-[#1E4D35]/5 group hover:border-[#F5E74E]/30 transition-all"
+                        className="bg-white rounded-[24px] p-6 shadow-sm border border-[#1E4D35]/5 group hover:border-[#1E4D35]/10 transition-all"
                     >
-                        <div className="flex justify-between items-start mb-8">
-                            <div className="w-12 h-12 bg-[#1E4D35]/5 rounded-2xl flex items-center justify-center text-[#1E4D35] transition-all group-hover:bg-[#1E4D35] group-hover:text-[#F5E74E]">
+                        <div className="flex justify-between items-start mb-6">
+                            <div className="w-10 h-10 bg-[#1E4D35]/5 rounded-xl flex items-center justify-center text-[#1E4D35] transition-all group-hover:bg-[#1E4D35] group-hover:text-[#F5E74E]">
                                 {stat.icon}
                             </div>
-                            <span className="text-[11px] font-black text-green-500 bg-green-50 px-3 py-1.5 rounded-full flex items-center gap-1">
+                            <span className="text-[11px] font-bold text-green-500 bg-green-50 px-2.5 py-1 rounded-full flex items-center gap-1">
                                 <ArrowUpRight size={12} /> {stat.trend}
                             </span>
                         </div>
-                        <h3 className="text-3xl font-black text-[#1E4D35] font-display">{stat.value}</h3>
-                        <p className="text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-widest mt-1">{stat.label}</p>
+                        <h3 className="text-2xl font-bold text-[#1E4D35] font-sans">{stat.value}</h3>
+                        <p className="text-[13px] font-bold text-[#1E4D35]/30 uppercase tracking-widest mt-1">{stat.label}</p>
                     </motion.div>
                 ))}
             </div>

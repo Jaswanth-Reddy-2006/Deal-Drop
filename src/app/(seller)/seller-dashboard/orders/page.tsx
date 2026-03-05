@@ -28,25 +28,19 @@ export default function OrdersPage() {
     ];
 
     return (
-        <div className="space-y-10">
-            {/* ── Header ── */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                <div>
-                    <h1 className="text-4xl font-display font-black text-[#1E4D35] tracking-tight">Order Management</h1>
-                    <p className="text-[#1E4D35]/40 font-bold mt-1 text-[15px]">You have {orders.filter(o => o.status === "PENDING").length} orders pending fulfillment.</p>
-                </div>
-                <div className="flex items-center gap-3">
-                    <button className="flex items-center gap-2 px-8 py-5 rounded-full bg-white text-[#1E4D35] font-black shadow-sm shadow-[#1E4D35]/10 border border-[#1E4D35]/5 hover:bg-[#F5F7F6] transition-all">
-                        <Calendar size={18} /> Schedule
-                    </button>
-                    <button className="flex items-center gap-2 px-8 py-5 rounded-full bg-[#1E4D35] text-[#F5E74E] font-black shadow-xl shadow-[#1E4D35]/20 hover:scale-[1.05] transition-all">
-                        Export Report
-                    </button>
-                </div>
+        <div className="space-y-6 lg:space-y-10">
+            {/* ── Page Actions ── */}
+            <div className="flex flex-col sm:flex-row justify-end items-stretch sm:items-center gap-4">
+                <button className="flex items-center justify-center gap-2 px-8 py-5 rounded-full bg-white text-[#1E4D35] font-black shadow-sm shadow-[#1E4D35]/10 border border-[#1E4D35]/5 hover:bg-[#F5F7F6] transition-all">
+                    <Calendar size={18} /> Schedule
+                </button>
+                <button className="flex items-center justify-center gap-2 px-8 py-5 rounded-full bg-[#1E4D35] text-[#F5E74E] font-black shadow-xl shadow-[#1E4D35]/20 hover:scale-[1.05] transition-all">
+                    Export Report
+                </button>
             </div>
 
             {/* ── Search & Filter ── */}
-            <div className="bg-white rounded-[32px] p-6 shadow-sm shadow-[#1E4D35]/5 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="bg-white rounded-[24px] lg:rounded-[32px] p-5 lg:p-6 shadow-sm shadow-[#1E4D35]/5 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-6">
                 <div className="relative w-full max-w-md">
                     <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-[#1E4D35]/30" size={18} />
                     <input
@@ -57,7 +51,7 @@ export default function OrdersPage() {
                         className="w-full bg-[#F5F7F6] border-2 border-transparent focus:border-[#F5E74E]/40 rounded-2xl py-3.5 pl-14 pr-6 text-sm font-bold outline-none transition-all placeholder:text-[#1E4D35]/20"
                     />
                 </div>
-                <div className="flex gap-4 w-full md:w-auto">
+                <div className="flex flex-row gap-4 w-full md:w-auto">
                     <button className="flex-1 md:flex-none flex items-center justify-center gap-2 px-8 py-3.5 rounded-2xl bg-[#F5F7F6] text-[#1E4D35] font-black text-sm hover:bg-[#1E4D35]/5 transition-all">
                         <Filter size={18} /> All Status
                     </button>
@@ -65,16 +59,16 @@ export default function OrdersPage() {
             </div>
 
             {/* ── Orders Table ── */}
-            <div className="bg-white rounded-[40px] shadow-sm shadow-[#1E4D35]/5 border border-[#1E4D35]/5 overflow-hidden">
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left">
+            <div className="bg-white rounded-[32px] lg:rounded-[40px] shadow-sm shadow-[#1E4D35]/5 border border-[#1E4D35]/5 overflow-hidden">
+                <div className="overflow-x-auto -mx-2 px-2 pb-2 mt-2">
+                    <table className="w-full text-left min-w-[1000px]">
                         <thead>
                             <tr className="bg-[#F5F7F6]/50 border-b border-[#1E4D35]/5">
-                                <th className="py-7 px-10 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em]">Order Detail</th>
-                                <th className="py-7 px-10 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em]">Customer</th>
-                                <th className="py-7 px-10 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em] text-center">Amount</th>
-                                <th className="py-7 px-10 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em] text-center">Status</th>
-                                <th className="py-7 px-10 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em] text-right">Action</th>
+                                <th className="py-6 px-10 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em]">Order Detail</th>
+                                <th className="py-6 px-10 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em]">Customer</th>
+                                <th className="py-6 px-10 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em] text-center">Amount</th>
+                                <th className="py-6 px-10 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em] text-center">Status</th>
+                                <th className="py-6 px-10 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em] text-right">Action</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-[#1E4D35]/5">
@@ -86,38 +80,38 @@ export default function OrdersPage() {
                                     transition={{ delay: i * 0.05 }}
                                     className="group hover:bg-[#F5F7F6]/50 transition-all duration-300"
                                 >
-                                    <td className="py-8 px-10">
+                                    <td className="py-7 px-10">
                                         <div className="flex items-center gap-5">
-                                            <div className="w-14 h-14 bg-white border border-[#1E4D35]/5 rounded-2xl flex items-center justify-center font-black text-[#1E4D35] group-hover:bg-[#F5E74E] transition-all">
+                                            <div className="w-12 h-12 lg:w-14 lg:h-14 bg-white border border-[#1E4D35]/5 rounded-xl lg:rounded-2xl flex items-center justify-center font-black text-[#1E4D35] group-hover:bg-[#F5E74E] transition-all shrink-0">
                                                 {o.items}x
                                             </div>
-                                            <div>
-                                                <p className="font-black text-[16px] text-[#1E4D35] leading-tight mb-1">{o.id}</p>
-                                                <p className="text-[11px] font-black text-[#1E4D35]/30 tracking-widest uppercase flex items-center gap-1.5 pt-0.5">
+                                            <div className="min-w-0">
+                                                <p className="font-black text-[15px] lg:text-[16px] text-[#1E4D35] leading-tight mb-1 truncate">{o.id}</p>
+                                                <p className="text-[10px] lg:text-[11px] font-black text-[#1E4D35]/30 tracking-widest uppercase flex items-center gap-1.5 pt-0.5">
                                                     <Calendar size={12} /> {o.date}
                                                 </p>
                                             </div>
                                         </div>
                                     </td>
-                                    <td className="py-8 px-10">
-                                        <div>
-                                            <p className="font-black text-[15px] text-[#1E4D35] mb-1">{o.customer}</p>
-                                            <p className="text-[11px] font-bold text-[#1E4D35]/30 flex items-center gap-1.5">
+                                    <td className="py-7 px-10">
+                                        <div className="min-w-0">
+                                            <p className="font-black text-[14px] lg:text-[15px] text-[#1E4D35] mb-1 truncate">{o.customer}</p>
+                                            <p className="text-[10px] lg:text-[11px] font-bold text-[#1E4D35]/30 flex items-center gap-1.5 truncate">
                                                 <MapPin size={12} /> {o.location}
                                             </p>
                                         </div>
                                     </td>
-                                    <td className="py-8 px-10 text-center font-black text-xl text-[#1E4D35] font-display">
+                                    <td className="py-7 px-10 text-center font-black text-lg lg:text-xl text-[#1E4D35] font-display">
                                         ${o.total.toFixed(2)}
                                     </td>
-                                    <td className="py-8 px-10 text-center">
-                                        <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${o.statusColor}`}>
+                                    <td className="py-7 px-10 text-center">
+                                        <span className={`px-4 py-1.5 rounded-full text-[9px] lg:text-[10px] font-black uppercase tracking-widest ${o.statusColor}`}>
                                             {o.status}
                                         </span>
                                     </td>
-                                    <td className="py-8 px-10 text-right">
-                                        <button className="w-12 h-12 bg-[#F5F7F6] rounded-2xl flex items-center justify-center text-[#1E4D35]/30 hover:bg-[#1E4D35] hover:text-white transition-all ml-auto">
-                                            <ChevronRight size={20} />
+                                    <td className="py-7 px-10 text-right">
+                                        <button className="w-10 h-10 lg:w-12 lg:h-12 bg-[#F5F7F6] rounded-xl lg:rounded-2xl flex items-center justify-center text-[#1E4D35]/30 hover:bg-[#1E4D35] hover:text-white transition-all ml-auto">
+                                            <ChevronRight size={18} />
                                         </button>
                                     </td>
                                 </motion.tr>

@@ -55,20 +55,16 @@ export default function InventoryPage() {
     );
 
     return (
-        <div className="space-y-10">
-            {/* ── Header Area ── */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                <div>
-                    <h1 className="text-4xl font-display font-black text-[#1E4D35] tracking-tight">Inventory</h1>
-                    <p className="text-[#1E4D35]/40 font-bold mt-1 text-[15px]">Managing {products.length} live listings in your store.</p>
-                </div>
-                <Link href="/seller-dashboard/add-product" className="group flex items-center gap-3 bg-[#1E4D35] text-[#F5E74E] font-black px-8 py-5 rounded-full hover:scale-[1.05] active:scale-95 transition-all shadow-xl shadow-[#1E4D35]/20">
+        <div className="space-y-6 lg:space-y-10">
+            {/* ── Page Actions ── */}
+            <div className="flex flex-col sm:flex-row justify-end items-stretch sm:items-center gap-4">
+                <Link href="/seller-dashboard/add-product" className="group flex items-center justify-center gap-3 bg-[#1E4D35] text-[#F5E74E] font-black px-8 py-5 rounded-full hover:scale-[1.05] active:scale-95 transition-all shadow-xl shadow-[#1E4D35]/20">
                     <Plus size={20} className="group-hover:rotate-90 transition-transform duration-300" /> Create New Listing
                 </Link>
             </div>
 
             {/* ── Filter Controls ── */}
-            <div className="bg-white rounded-[32px] p-6 shadow-sm shadow-[#1E4D35]/5 flex flex-col md:flex-row items-center justify-between gap-6 border border-transparent">
+            <div className="bg-white rounded-[24px] lg:rounded-[32px] p-5 lg:p-6 shadow-sm shadow-[#1E4D35]/5 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-6">
                 <div className="relative w-full max-w-md">
                     <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-[#1E4D35]/30" size={18} />
                     <input
@@ -79,28 +75,28 @@ export default function InventoryPage() {
                         className="w-full bg-[#F5F7F6] border-2 border-transparent focus:border-[#F5E74E]/40 rounded-2xl py-3.5 pl-14 pr-6 text-sm font-bold outline-none transition-all placeholder:text-[#1E4D35]/20"
                     />
                 </div>
-                <div className="flex gap-4 w-full md:w-auto">
-                    <button className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-[#F5F7F6] text-[#1E4D35] font-black text-sm hover:bg-[#1E4D35]/5 transition-all border border-transparent">
+                <div className="flex flex-row gap-4 w-full md:w-auto">
+                    <button className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-[#F5F7F6] text-[#1E4D35] font-black text-sm hover:bg-[#1E4D35]/5 transition-all">
                         <Filter size={18} /> Filters
                     </button>
-                    <button className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-[#F5F7F6] text-[#1E4D35] font-black text-sm hover:bg-[#1E4D35]/5 transition-all border border-transparent">
+                    <button className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-[#F5F7F6] text-[#1E4D35] font-black text-sm hover:bg-[#1E4D35]/5 transition-all">
                         <Download size={18} /> Export
                     </button>
                 </div>
             </div>
 
             {/* ── Main Inventory Table ── */}
-            <div className="bg-white rounded-[40px] shadow-sm shadow-[#1E4D35]/5 border border-[#1E4D35]/5 overflow-hidden">
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left">
+            <div className="bg-white rounded-[32px] lg:rounded-[40px] shadow-sm shadow-[#1E4D35]/5 border border-[#1E4D35]/5 overflow-hidden">
+                <div className="overflow-x-auto -mx-2 px-2 pb-2 mt-2">
+                    <table className="w-full text-left min-w-[900px]">
                         <thead>
                             <tr className="bg-[#F5F7F6]/50 border-b border-[#1E4D35]/5">
-                                <th className="py-7 px-8 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em]">Product Detail</th>
-                                <th className="py-7 px-8 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em]"><div className="flex items-center gap-2">Category <ArrowUpDown size={12} /></div></th>
-                                <th className="py-7 px-8 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em]"><div className="flex items-center gap-2">Price <ArrowUpDown size={12} /></div></th>
-                                <th className="py-7 px-8 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em]"><div className="flex items-center gap-2 text-center w-full justify-center">Inventory</div></th>
-                                <th className="py-7 px-8 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em] text-right">Visibility</th>
-                                <th className="py-7 px-8 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em] text-right">Actions</th>
+                                <th className="py-6 px-8 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em]">Product Detail</th>
+                                <th className="py-6 px-8 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em]"><div className="flex items-center gap-2">Category <ArrowUpDown size={12} /></div></th>
+                                <th className="py-6 px-8 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em]"><div className="flex items-center gap-2">Price <ArrowUpDown size={12} /></div></th>
+                                <th className="py-6 px-8 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em]"><div className="flex items-center gap-2 text-center w-full justify-center">Inventory</div></th>
+                                <th className="py-6 px-8 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em] text-right">Visibility</th>
+                                <th className="py-6 px-8 text-[11px] font-black text-[#1E4D35]/30 uppercase tracking-[0.2em] text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-[#1E4D35]/5">
@@ -116,7 +112,7 @@ export default function InventoryPage() {
                             ) : filteredProducts.length === 0 ? (
                                 <tr>
                                     <td colSpan={6} className="py-32">
-                                        <div className="flex flex-col items-center justify-center max-w-xs mx-auto text-center">
+                                        <div className="flex flex-col items-center justify-center max-w-xs mx-auto text-center px-6">
                                             <div className="w-20 h-20 bg-[#F5F7F6] rounded-[28px] flex items-center justify-center text-[#1E4D35]/10 mb-6">
                                                 <Package size={40} />
                                             </div>
@@ -134,50 +130,50 @@ export default function InventoryPage() {
                                     transition={{ delay: i * 0.05 }}
                                     className="group hover:bg-[#F5F7F6]/50 transition-all duration-300"
                                 >
-                                    <td className="py-7 px-8">
+                                    <td className="py-6 px-8">
                                         <div className="flex items-center gap-5">
-                                            <div className="w-16 h-16 rounded-[22px] bg-[#F5F7F6] flex items-center justify-center overflow-hidden border border-transparent group-hover:border-[#1E4D35]/10 transition-colors shrink-0">
+                                            <div className="w-14 h-14 rounded-[18px] bg-[#F5F7F6] flex items-center justify-center overflow-hidden border border-transparent group-hover:border-[#1E4D35]/10 transition-colors shrink-0">
                                                 {p.images && p.images[0] ? (
                                                     <img src={p.images[0]} alt={p.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                                                 ) : (
                                                     <Package className="w-6 h-6 text-[#1E4D35]/10" />
                                                 )}
                                             </div>
-                                            <div>
-                                                <p className="font-black text-[15px] text-[#1E4D35] leading-tight mb-1">{p.name}</p>
-                                                <p className="text-[11px] font-black text-[#1E4D35]/20 tracking-[0.1em] uppercase">SKU: {p.sku || "N/A"}</p>
+                                            <div className="min-w-0">
+                                                <p className="font-black text-[14px] lg:text-[15px] text-[#1E4D35] leading-tight mb-1 truncate max-w-[200px]">{p.name}</p>
+                                                <p className="text-[9px] lg:text-[11px] font-black text-[#1E4D35]/20 tracking-[0.1em] uppercase">SKU: {p.sku || "N/A"}</p>
                                             </div>
                                         </div>
                                     </td>
-                                    <td className="py-7 px-8">
-                                        <span className="bg-[#1E4D35]/5 text-[#1E4D35] text-[11px] font-black px-4 py-1.5 rounded-full tracking-wider uppercase">{p.category}</span>
+                                    <td className="py-6 px-8">
+                                        <span className="bg-[#1E4D35]/5 text-[#1E4D35] text-[10px] lg:text-[11px] font-black px-4 py-1.5 rounded-full tracking-wider uppercase">{p.category}</span>
                                     </td>
-                                    <td className="py-7 px-8">
-                                        <p className="text-[17px] font-black text-[#1E4D35] font-display">${p.price?.toFixed(2) || "0.00"}</p>
+                                    <td className="py-6 px-8">
+                                        <p className="text-[15px] lg:text-[16px] font-bold text-[#1E4D35]">${p.price?.toFixed(2) || "0.00"}</p>
                                     </td>
-                                    <td className="py-7 px-8 text-center">
+                                    <td className="py-6 px-8 text-center">
                                         <div className="flex flex-col items-center">
-                                            <span className={`text-[17px] font-black font-display ${p.stock < 10 && p.stock > 0 ? 'text-[#F5E74E]' :
-                                                    p.stock === 0 ? 'text-[#F83737]' : 'text-[#1E4D35]'
+                                            <span className={`text-[15px] lg:text-[16px] font-bold ${p.stock < 10 && p.stock > 0 ? 'text-amber-500' :
+                                                p.stock === 0 ? 'text-[#F83737]' : 'text-[#1E4D35]'
                                                 }`}>
                                                 {p.stock}
                                             </span>
                                             <p className="text-[9px] font-black text-[#1E4D35]/20 uppercase tracking-widest mt-0.5">Units</p>
                                         </div>
                                     </td>
-                                    <td className="py-7 px-8 text-right">
-                                        <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${p.stock > 0 ? 'bg-green-100/50 text-green-600' : 'bg-red-50 text-red-500'
+                                    <td className="py-6 px-8 text-right">
+                                        <span className={`px-4 py-1.5 rounded-full text-[9px] lg:text-[10px] font-black uppercase tracking-widest ${p.stock > 0 ? 'bg-green-100/50 text-green-600' : 'bg-red-50 text-red-500'
                                             }`}>
                                             {p.stock > 0 ? "LIVE" : "DRAFT"}
                                         </span>
                                     </td>
-                                    <td className="py-7 px-8 text-right">
-                                        <div className="flex flex-row justify-end gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                                            <button className="w-12 h-12 flex items-center justify-center bg-white rounded-2xl text-[#1E4D35]/40 hover:bg-[#F5E74E] hover:text-[#1E4D35] shadow-sm transition-all border border-[#1E4D35]/5">
-                                                <Edit size={18} />
+                                    <td className="py-6 px-8 text-right">
+                                        <div className="flex flex-row justify-end gap-2 md:gap-3 lg:opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                            <button className="w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center bg-white rounded-[14px] lg:rounded-2xl text-[#1E4D35]/40 hover:bg-[#F5E74E] hover:text-[#1E4D35] shadow-sm transition-all border border-[#1E4D35]/5">
+                                                <Edit size={16} />
                                             </button>
-                                            <button className="w-12 h-12 flex items-center justify-center bg-white rounded-2xl text-[#1E4D35]/40 hover:bg-[#F83737] hover:text-white shadow-sm transition-all border border-[#1E4D35]/5">
-                                                <Trash2 size={18} />
+                                            <button className="w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center bg-white rounded-[14px] lg:rounded-2xl text-[#1E4D35]/40 hover:bg-[#F83737] hover:text-white shadow-sm transition-all border border-[#1E4D35]/5">
+                                                <Trash2 size={16} />
                                             </button>
                                         </div>
                                     </td>
